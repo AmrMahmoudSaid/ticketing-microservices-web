@@ -7,8 +7,7 @@ import {currentUserRouter} from "./routes/currentuser";
 import {signinRouter} from "./routes/signin";
 import {signoutRouter} from "./routes/signout";
 import {signupRouter} from "./routes/signup";
-import {errorHandler} from "../../common/src/middlewares/error-handler";
-import {NotFound} from "../../common/src/errors/not-found";
+import {errorHandler,NotFound} from "@amtickets377/common"
 import * as tty from "tty";
 
 const app = express();
