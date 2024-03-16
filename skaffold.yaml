@@ -15,3 +15,12 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    - image: amrmahmoud377/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+
