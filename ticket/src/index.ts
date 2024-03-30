@@ -6,8 +6,11 @@ const start = async () => {
     if (!process.env.JWT_KEY){
         throw  new Error('jwt key doesnt exist');
     }
+    if (!process.env.MONGO_URL){
+        throw  new Error('Mongo url doesnt exist');
+    }
     try{
-      await mongoose.connect('mongodb://auth-mongo-srv:27017/auth' );
+      await mongoose.connect(process.env.MONGO_URL);
       //   await mongoose.connect('mongodb://localhost:27017/auth' );
         console.log("DB connection");
     }catch (err){
