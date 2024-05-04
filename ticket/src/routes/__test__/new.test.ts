@@ -1,6 +1,7 @@
 import request from "supertest";
 import {app} from "../../app";
 import {Ticket} from "../../model/ticket";
+import {natsWrapper} from "../../nats-wrapper";
 
 it('can accessed if the user is signed in', async () =>{
     const res = await request(app)
@@ -67,3 +68,15 @@ it('create ticket',async ()=>{
     expect(tickets.length).toEqual(1);
     expect(tickets[0].price).toEqual(50);
 });
+
+it('Publish an event', async () =>{
+    await request(app)
+        .post('/api/tickets')
+        .set('Cookie',global.signin() )
+        .send({
+            title:'sdfsdg',
+            price: 50
+        })
+        .expect(201);
+    expect(natsWrapper.client.publish).toHaveBeenCalled();
+})
