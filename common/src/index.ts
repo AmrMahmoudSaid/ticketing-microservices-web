@@ -15,3 +15,4 @@ export * from './event/base-publesher';
 export * from './event/subjects';
 export * from './event/ticket-create-event';
 export * from './event/ticket-updated-event';
+export * from './event/enums/order-status';
