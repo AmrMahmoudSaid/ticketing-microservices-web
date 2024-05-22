@@ -29,3 +29,4 @@ __exportStar(require("./event/base-publesher"), exports);
 __exportStar(require("./event/subjects"), exports);
 __exportStar(require("./event/ticket-create-event"), exports);
 __exportStar(require("./event/ticket-updated-event"), exports);
+__exportStar(require("./event/enums/order-status"), exports);
