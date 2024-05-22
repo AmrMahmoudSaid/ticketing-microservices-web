@@ -8,7 +8,7 @@ export interface OrderCreatedEvent{
         userId: string;
         status: OrderStatus.Created;
         expiresAt: string;
-        ticker: {
+        ticket: {
             id: string;
             price: number
         }
