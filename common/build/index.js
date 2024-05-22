@@ -30,3 +30,5 @@ __exportStar(require("./event/subjects"), exports);
 __exportStar(require("./event/ticket-create-event"), exports);
 __exportStar(require("./event/ticket-updated-event"), exports);
 __exportStar(require("./event/enums/order-status"), exports);
+__exportStar(require("./event/order-cancelled-event"), exports);
+__exportStar(require("./event/order-created-event"), exports);
