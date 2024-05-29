@@ -5,6 +5,7 @@ export interface OrderCreatedEvent{
 
     data: {
         id: string;
+        version : number;
         userId: string;
         status: OrderStatus.Created;
         expiresAt: string;
