@@ -7,5 +7,6 @@ export interface TicketCreateEvent {
         title: string;
         price: number;
         userId: string;
+        version : number;
     };
 }
