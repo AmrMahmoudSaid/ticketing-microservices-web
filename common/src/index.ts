@@ -1,4 +1,3 @@
-import exp from "constants";
 
 export * from './errors/BadRequestError';
 export * from './errors/custom-error';
