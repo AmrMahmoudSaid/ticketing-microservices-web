@@ -9,6 +9,7 @@ import {OrderStatus} from "@amtickets377/common";
 
 it('fetch order for signin user ', async () => {
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "Ticket",
         price: 100
     });

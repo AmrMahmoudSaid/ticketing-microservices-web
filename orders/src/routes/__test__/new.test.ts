@@ -20,6 +20,7 @@ it("returns an error if the ticket does not exist", async () => {
 
 it('returns an error if the ticket is reserved', async ()=>{
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "test",
         price:10
     });
@@ -43,6 +44,7 @@ it('returns an error if the ticket is reserved', async ()=>{
 
 it('Create order', async ()=>{
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "test",
         price:10
     });
