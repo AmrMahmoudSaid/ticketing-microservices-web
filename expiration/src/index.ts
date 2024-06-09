@@ -1,17 +1,10 @@
 import 'express-async-errors'
-import mongoose from 'mongoose';
-import {app} from "./app";
+
+
 import {natsWrapper} from "./nats-wrapper";
 import {OrderCreatedListener} from "./event/listeners/order-created-listener";
-import {OrderCancelledListener} from "./event/listeners/order-cancelled-listener";
 
 const start = async () => {
-    if (!process.env.JWT_KEY){
-        throw  new Error('jwt key doesnt exist');
-    }
-    if (!process.env.MONGO_URL){
-        throw  new Error('Mongo url doesnt exist');
-    }
     if (!process.env.NATS_URL){
         throw  new Error('NATS_URL doesnt exist');
     }
@@ -32,16 +25,11 @@ const start = async () => {
         });
         process.on('SIGTERM', ()=> natsWrapper.client.close());
         process.on('SIGINT', ()=> natsWrapper.client.close());
-        new OrderCancelledListener(natsWrapper.client).listen();
+
         new OrderCreatedListener(natsWrapper.client).listen();
-        await mongoose.connect("mongodb://ticket-mongo-srv:27017/tickets");
-      //   await mongoose.connect('mongodb://localhost:27017/auth' );
-        console.log("DB connection");
     }catch (err){
         console.log(err);
     }
 };
-app.listen(3000,() =>{
-    console.log('Listening on port 3000');
-});
+
 start();
