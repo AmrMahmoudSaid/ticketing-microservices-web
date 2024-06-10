@@ -2,10 +2,8 @@ import 'express-async-errors'
 import mongoose from 'mongoose';
 import {app} from "./app";
 import {natsWrapper} from "./nats-wrapper";
-import {TicketCreatedListener} from "./event/lisreners/ticket-created-listener";
-import {TicketUpdatedListener} from "./event/lisreners/ticker-updated-listener";
-import {ExpirationCompleteListener} from "./event/lisreners/expiration-complete-listener";
-import {PaymentCreatedListener} from "./event/lisreners/payment-created-listener";
+import {OrderCancelledListener} from "./events/listeners/order-cancelled-listener";
+import {OrderCreatedListeners} from "./events/listeners/order-created-listeners";
 
 const start = async () => {
     if (!process.env.JWT_KEY){
@@ -34,11 +32,9 @@ const start = async () => {
         });
         process.on('SIGTERM', ()=> natsWrapper.client.close());
         process.on('SIGINT', ()=> natsWrapper.client.close());
-        new TicketUpdatedListener(natsWrapper.client).listen();
-        new TicketCreatedListener(natsWrapper.client).listen();
-        new ExpirationCompleteListener(natsWrapper.client).listen();
-        new PaymentCreatedListener(natsWrapper.client).listen();
-        await mongoose.connect("mongodb://orders-mongo-srv:27017/tickets");
+        new OrderCancelledListener(natsWrapper.client).listen();
+        new OrderCreatedListeners(natsWrapper.client).listen();
+        await mongoose.connect("mongodb://payment-mongo-srv:27017/payments");
       //   await mongoose.connect('mongodb://localhost:27017/auth' );
         console.log("DB connection");
     }catch (err){
